@@ -21,8 +21,9 @@ const { botServies } = require("./Services/botServices");
 app.post('/whatsapp', async (req, res) => {
 
      if (req.body.type == "message") {
-        const respose = await botServies(req);
-        res.send(respose);
+        const response = await botServies(req);
+        console.log(response);
+        res.send(response);
         return ;
     }
     else{
