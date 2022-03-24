@@ -9,7 +9,7 @@ const productDetails = async (productTitle)=>{
         "content":{ 
             "type":"text", 
             "header": productDetailsDTO.name+" Details", 
-            "text":`1. Product Name :  ${productDetailsDTO.name}\n2. Available Stock : ${productDetailsDTO.stock}`
+            "text":`1. Product Name :  ${productDetailsDTO.name}\n2. Product Category : ${productDetailsDTO.category}\n3. Available Stock : ${productDetailsDTO.stock}`
         },
         "options":[ 
             { 
@@ -23,6 +23,27 @@ const productDetails = async (productTitle)=>{
         ]
     }
     return response;
+}
+
+const productProcess = async (action, productId)=>{
+    if(action == "sample image"){
+        return{
+            "type": "text",
+            "text": "sample image will be sent!!"
+        }
+    }
+    else if( action == "order"){
+        return {
+            type : "text",
+            text : `Order for ${productId} is conformed. Thank you !!`
+        }
+    }
+    else {
+        return  {
+            "type": "text",
+            "text": "Sorry ... Error !!"
+    }
+    }
 }
 const botServies = async (req)=>{
 
@@ -48,6 +69,7 @@ const botServies = async (req)=>{
         let queryType = req.body.payload.payload.id.split('-')[0];
         switch(queryType){
             case "productMenu" : return await productDetails(req.body.payload.payload.title);
+            case "productDetails" : return await productProcess(req.body.payload.payload.title, req.body.payload.payload.id.split('-')[1]);
         }
     }
 }
