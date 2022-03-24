@@ -1,5 +1,30 @@
 
-const { getAllProducts } = require("../Models/Products");
+const { getAllProducts, getProductByTitle } = require("../Models/Products");
+
+const productDeatils = async (productTitle)=>{
+    const productDetailsDTO = await getProductByTitle(productTitle);
+    const response = {
+        "type":"quick_reply",
+        "msgid":"productDeatils-"+productDetailsDTO.productId,
+        "content":{ 
+            "type":"text", 
+            "header": productDetailsDTO.name+" Details", 
+            "text":`1. Product Name :  ${productDeatilsDTO.name}\n2. Available Stock : ${productDeatilsDTO.stock}`,
+            "options":[ 
+                { 
+                    "type":"text", 
+                    "title":"sample image"
+                }, 
+                { 
+                    "type":"text", 
+                    "title":"order"
+                }
+            ]
+        }
+    
+    }
+    return response;
+}
 const botServies = async (req)=>{
 
     if(req.body.payload.type === "text"){
@@ -19,6 +44,12 @@ const botServies = async (req)=>{
         })
         response.options = options;
         return response;
+    }
+    else if( req.body.payload.type === "button_reply"){
+        let queryType = req.body.payload.payload.id.split('-')[0];
+        switch(queryType){
+            case "productMenu" : return await productDeatils(req.body.payload.payload.title);
+        }
     }
 }
 

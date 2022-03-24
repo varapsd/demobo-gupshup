@@ -29,12 +29,15 @@ const addNewProduct = async (req)=>{
             return {status:400, data:err};
         });
 }
-
+const getProductByTitle = async(productTitle)=>{
+    return Product.findOne({name:productTitle});
+}
 const getAllProducts = async ()=>{
     return Product.find({});
 }
 
 module.exports = {
     addNewProduct,
-    getAllProducts
+    getAllProducts,
+    getProductByTitle
 }
