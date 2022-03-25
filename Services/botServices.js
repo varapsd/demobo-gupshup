@@ -1,5 +1,5 @@
 
-const { getAllProducts, getProductByTitle } = require("../Models/Products");
+const { getAllProducts, getProductByTitle, getActiveProducts } = require("../Models/Products");
 
 const productDetails = async (productTitle)=>{
     const productDetailsDTO = await getProductByTitle(productTitle);
@@ -48,7 +48,7 @@ const productProcess = async (action, productId)=>{
 const botServies = async (req)=>{
 
     if(req.body.payload.type === "text"){
-        const allProducts = await getAllProducts();
+        const allProducts = await getActiveProducts();
         const response = {
             "type":"quick_reply",
             "msgid":"productMenu",

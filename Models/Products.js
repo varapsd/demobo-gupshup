@@ -35,6 +35,10 @@ const getProductByTitle = async(productTitle)=>{
 const getAllProducts = async ()=>{
     return Product.find({});
 }
+
+const getActiveProducts = async ()=>{
+    return Product.find({isActive:true});
+}
 const updateProduct = async (req)=>{
     const validProduct = await Product.findOne({_id : req._id});
     if(validProduct){
@@ -60,5 +64,6 @@ module.exports = {
     addNewProduct,
     getAllProducts,
     getProductByTitle,
-    updateProduct
+    updateProduct,
+    getActiveProducts
 }
