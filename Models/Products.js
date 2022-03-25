@@ -35,9 +35,30 @@ const getProductByTitle = async(productTitle)=>{
 const getAllProducts = async ()=>{
     return Product.find({});
 }
+const updateProduct = async (req)=>{
+    const validProduct = await Product.findOne({_id : req._id});
+    if(validProduct){
+        validProduct.name = req.name;
+        validProduct.category = req.category;
+        validProduct.isActive = req.isActive;
+        validProduct.quantity = req.quantity;
+        validProduct.stock = req.stock;
+        return validProduct.save()
+            .then((product) => {
+                return {status:200, data:product};
+            })
+            .catch(err => {
+                return {status:400, data:err};
+            });
+    }
+    else{
+        return {status:400, data:err};
+    }
+}
 
 module.exports = {
     addNewProduct,
     getAllProducts,
-    getProductByTitle
+    getProductByTitle,
+    updateProduct
 }

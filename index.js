@@ -48,10 +48,21 @@ app.post("/addProduct", async (req,res)=>{
     res.sendStatus(response.status);
 })
 
-const { getAllProducts } = require("./Models/Products");
+const { getAllProducts, updateProduct } = require("./Models/Products");
 app.get("/getAllProducts", async (req,res)=>{
     const response = await getAllProducts();
     res.send(response);
+})
+
+
+app.post("/updateProduct", async (req,res)=>{
+    const response = updateProduct(req.body);
+    if(response.status == 200){
+        res.send({"isSuccess":"true"})
+    }
+    else{
+        res.send({"isSuccess":"false"})
+    }
 })
  
 const PORT = process.env.PORT;
