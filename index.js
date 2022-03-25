@@ -56,7 +56,7 @@ app.get("/getAllProducts", async (req,res)=>{
 
 
 app.post("/updateProduct", async (req,res)=>{
-    const response = updateProduct(req.body);
+    const response = await updateProduct(req.body);
     console.log(response);
     if(response.status == 200){
         res.send({"isSuccess":"true"})
