@@ -40,6 +40,12 @@ app.post("/addProduct", async (req,res)=>{
     }
     res.sendStatus(response.status);
 })
+
+const { getAllProducts } = require("./Models/Products");
+app.get("/getAllProducts", async (req,res)=>{
+    const response = await getAllProducts();
+    res.send(response);
+})
  
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
