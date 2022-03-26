@@ -74,14 +74,27 @@ const botServies = async (req)=>{
             ], 
             "items": [
                 { 
-                    "title": "Menu"
+                    "title": "Menu",
+                    "options": [
+                        { 
+                            "type": "text", 
+                            "title": "Availalbe Flowers", 
+                            "postbackText": "available Flowers" 
+                        }, 
+                        { 
+                            "type": "text", 
+                            "title": "Availalbe Seeds", 
+                            "postbackText": "available Seeds" 
+                        }, 
+                    ] 
                 }
             ]
         }
         let options = allProducts.map(product => {
             return { type : "text", title : product.name }
         })
-        mainMenu.items.options = options;
+        console.log(options);
+        //mainMenu.items.options = options;
         return mainMenu;
     }
     else if( req.body.payload.type === "list_reply"){
