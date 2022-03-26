@@ -35,7 +35,7 @@ const productProcess = async (action, productId)=>{
     else if( action == "order"){
         return {
             type : "text",
-            text : `Order for ${productId} is conformed. Thank you !!`
+            text : `Order for ${productId} is confirmed. Thank you !!`
         }
     }
     else {
