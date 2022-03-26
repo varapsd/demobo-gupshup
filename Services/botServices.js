@@ -9,7 +9,7 @@ const productDetails = async (productTitle)=>{
         "content":{ 
             "type":"text", 
             "header": productDetailsDTO.name+" Details", 
-            "text":`1. Product Name :  ${productDetailsDTO.name}\n2. Product Category : ${productDetailsDTO.category}\n3. Available Stock : ${productDetailsDTO.stock}`
+            "text":`1. Product Name :  ${productDetailsDTO.name}\n2. Product Category : ${productDetailsDTO.category}\n3. Available Quantity : ${productDetailsDTO.quantity}\n4. Available Price : ${productDetailsDTO.price}`
         },
         "options":[ 
             { 

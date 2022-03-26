@@ -6,7 +6,7 @@ var ProductSchema = mongoose.Schema({
     category : String,
     isActive : Boolean,
     quantity : Number,
-    stock : Number,
+    price : Number,
 });
 
 const Product = mongoose.model('product',ProductSchema);
@@ -19,7 +19,7 @@ const addNewProduct = async (req)=>{
         category : req.category,
         isActive : req.isActive,
         quantity : req.quantity,
-        stock : req.stock,
+        price : req.price,
     })
     return newProduct.save()
         .then((usr) => {
@@ -46,7 +46,7 @@ const updateProduct = async (req)=>{
         validProduct.category = req.category;
         validProduct.isActive = req.isActive;
         validProduct.quantity = req.quantity;
-        validProduct.stock = req.stock;
+        validProduct.price = req.price;
         return validProduct.save()
             .then((product) => {
                 return {status:200, data:product};
