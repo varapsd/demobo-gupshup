@@ -49,6 +49,7 @@ const botServies = async (req)=>{
 
     if(req.body.payload.type === "text"){
         const allProducts = await getActiveProducts();
+        /*
         const response = {
             "type":"quick_reply",
             "msgid":"productMenu",
@@ -59,11 +60,32 @@ const botServies = async (req)=>{
             }
         
         }
+        */
+        const mainMenu = {
+            "type": "list", 
+            "title": "hi " + req.body.payload.sender.name, 
+            "body": "We have list of products, select a product !!", 
+            "msgid": "productMenu", 
+            "globalButtons": [
+                { 
+                    "type": "text", 
+                    "title": "Menu" 
+                }
+            ], 
+            "items": [
+                { 
+                    "title": "Menu"
+                }
+            ]
+        }
         let options = allProducts.map(product => {
             return { type : "text", title : product.name }
         })
-        response.options = options;
-        return response;
+        mainMenu.items.options = options;
+        return mainMenu;
+    }
+    else if( req.body.payload.type === "list_reply"){
+        return await productDetails(req.body.payload.payload.title);
     }
     else if( req.body.payload.type === "button_reply"){
         let queryType = req.body.payload.payload.id.split('-')[0];
