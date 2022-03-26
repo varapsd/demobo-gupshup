@@ -61,6 +61,11 @@ const botServies = async (req)=>{
         
         }
         */
+
+        let options = allProducts.map(product => {
+            return { type : "text", title : product.name }
+        })
+
         const mainMenu = {
             "type": "list", 
             "title": "hi " + req.body.payload.sender.name, 
@@ -75,24 +80,11 @@ const botServies = async (req)=>{
             "items": [
                 { 
                     "title": "Menu",
-                    "options": [
-                        { 
-                            "type": "text", 
-                            "title": "Availalbe Flowers", 
-                            "postbackText": "available Flowers" 
-                        }, 
-                        { 
-                            "type": "text", 
-                            "title": "Availalbe Seeds", 
-                            "postbackText": "available Seeds" 
-                        }, 
-                    ] 
+                    "options": options
                 }
             ]
         }
-        let options = allProducts.map(product => {
-            return { type : "text", title : product.name }
-        })
+        
         console.log(options);
         //mainMenu.items.options = options;
         return mainMenu;
