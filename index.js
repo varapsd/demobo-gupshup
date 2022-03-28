@@ -67,7 +67,7 @@ app.post("/updateProduct", async (req,res)=>{
 })
 
 const { getAllOrders } = require("./Models/Orders");
-app.post("/getAllOrders", async(req,res)=>{
+app.get("/getAllOrders", async(req,res)=>{
     const response = await getAllOrders();
     res.send(response);
 })
