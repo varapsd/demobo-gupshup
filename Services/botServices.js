@@ -1,8 +1,11 @@
 
 const { getAllProducts, getProductByTitle, getActiveProducts } = require("../Models/Products");
+const { addNewEnquiry } = require("../Models/Enquiry")
 const {addNewOrder} = require("../Models/Orders");
-const productDetails = async (productTitle)=>{
+const productDetails = async (req)=>{
+    const productTitle = req.payload.payload.title;
     const productDetailsDTO = await getProductByTitle(productTitle);
+    const responseDTO = await addNewEnquiry({ productId : productDetailsDTO.productId, name : req.payload.sender.name, phone : req.payload.sender.phone})
     const response = {
         "type":"quick_reply",
         "msgid":"productDetails-"+productDetailsDTO.productId,
@@ -102,7 +105,7 @@ const botServies = async (req)=>{
         return mainMenu;
     }
     else if( req.body.payload.type === "list_reply"){
-        return await productDetails(req.body.payload.payload.title);
+        return await productDetails(req.body);
     }
     else if( req.body.payload.type === "button_reply"){
         let queryType = req.body.payload.payload.id.split('-')[0];

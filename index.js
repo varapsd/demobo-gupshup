@@ -71,6 +71,12 @@ app.get("/getAllOrders", async(req,res)=>{
     const response = await getAllOrders();
     res.send(response);
 })
+
+const { getAllEnquiries } = require("./Models/Enquiry")
+app.get("/getAllEnquiries", async(req,res)=>{
+    const response = await getAllEnquiries();
+    res.send(response);
+})
  
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
