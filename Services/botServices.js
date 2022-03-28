@@ -35,7 +35,7 @@ const productProcess = async (req)=>{
         }
     }
     else if( action == "order"){
-        const response = await addNewOrder({productId:productId,phone: req.body.payload.sender.phone, name: req.body.payload.name });
+        const response = await addNewOrder({productId:productId,phone: req.body.payload.sender.phone, name: req.body.payload.sender.name });
         if(response.status == 200){
             return {
                 type : "text",

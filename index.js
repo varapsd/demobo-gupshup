@@ -65,6 +65,12 @@ app.post("/updateProduct", async (req,res)=>{
         res.send({"isSuccess":"false"})
     }
 })
+
+const { getAllOrders } = require("./Models/Orders");
+app.post("/getAllOrders", async(req,res)=>{
+    const response = await getAllOrders();
+    res.send(response);
+})
  
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
