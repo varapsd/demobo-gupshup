@@ -1,6 +1,6 @@
 
 const { getAllProducts, getProductByTitle, getActiveProducts } = require("../Models/Products");
-
+const {addNewOrder} = require("../Models/Orders");
 const productDetails = async (productTitle)=>{
     const productDetailsDTO = await getProductByTitle(productTitle);
     const response = {
@@ -25,7 +25,9 @@ const productDetails = async (productTitle)=>{
     return response;
 }
 
-const productProcess = async (action, productId)=>{
+const productProcess = async (req)=>{
+    const action = req.body.payload.payload.title;
+    const productId = req.body.payload.payload.id.split('-')[1];
     if(action == "sample image"){
         return{
             "type": "text",
@@ -33,16 +35,26 @@ const productProcess = async (action, productId)=>{
         }
     }
     else if( action == "order"){
-        return {
-            type : "text",
-            text : `Order for ${productId} is confirmed. Thank you !!`
+        const response = await addNewOrder({productId:productId,phone: req.body.payload.sender.phone, name: req.body.payload.name });
+        if(response.status == 200){
+            return {
+                type : "text",
+                text : `Order for ${productId} is confirmed. Thank you !!`
+            }
         }
+        else{
+            return  {
+                "type": "text",
+                "text": "Sorry ... Something went wrong, we will contact you !!"
+            }
+        }
+        
     }
     else {
         return  {
             "type": "text",
             "text": "Sorry ... Error !!"
-    }
+        }
     }
 }
 const botServies = async (req)=>{
@@ -95,8 +107,7 @@ const botServies = async (req)=>{
     else if( req.body.payload.type === "button_reply"){
         let queryType = req.body.payload.payload.id.split('-')[0];
         switch(queryType){
-            case "productMenu" : return await productDetails(req.body.payload.payload.title);
-            case "productDetails" : return await productProcess(req.body.payload.payload.title, req.body.payload.payload.id.split('-')[1]);
+            case "productDetails" : return await productProcess(req);
         }
     }
 }

@@ -12,7 +12,7 @@ var ProductSchema = mongoose.Schema({
 const Product = mongoose.model('product',ProductSchema);
 
 const addNewProduct = async (req)=>{
-    console.log(req);
+
     var newProduct = new Product({
         productId : await Product.countDocuments({}) + 1,
         name : req.name,
