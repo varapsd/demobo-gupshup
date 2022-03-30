@@ -155,7 +155,7 @@ const botServies = async (req)=>{
     else if( req.body.payload.type === "list_reply"){
         let queryType = req.body.payload.payload.id.split('-')[0];
         switch(queryType){
-            case "categoryMenu" : return await productMenu(req);
+            case "categoryMenu" : return await productMenu(req.body);
             case "productDetails" : return await productDetails(req.body);
         }
     }
