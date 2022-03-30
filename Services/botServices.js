@@ -85,7 +85,7 @@ const productMenu = async (req)=>{
     let options = allProducts.filter(product => {
         if(product.category === categoryTitle) return ;
     }).map(product =>{
-        return { type : "text", title : product.category }
+        return { type : "text", title : product.name }
     })
 
     console.log(options);
