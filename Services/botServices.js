@@ -82,8 +82,8 @@ const productProcess = async (req)=>{
 const productMenu = async (req)=>{
     const categoryTitle = req.payload.payload.title;
     const allProducts = await getActiveProducts();
-    let options = allProducts.filter(product => {
-        if(product.category === categoryTitle) return ;
+    let options = allProducts.filter(ele => {
+        if(ele.category === categoryTitle) return ele;
     }).map(product =>{
         return { type : "text", title : product.name }
     })
