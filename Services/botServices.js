@@ -78,6 +78,36 @@ const productProcess = async (req)=>{
         }
     }
 }
+
+const productMenu = async (req)=>{
+    const categoryTitle = req.payload.payload.title;
+    const allProducts = await getActiveProducts();
+    let options = allProducts.filter(product => {
+        if(product.category === categoryTitle)
+            return { type : "text", title : product.name }
+    })
+
+    const mainMenu = {
+        "type": "list", 
+        "title": "Availabe Product for " + categoryTitle , 
+        "body": "We have list of products, select a product !!", 
+        "msgid": "productDetails", 
+        "globalButtons": [
+            { 
+                "type": "text", 
+                "title": "Products" 
+            }
+        ], 
+        "items": [
+            { 
+                "title": "Menu",
+                "options": options
+            }
+        ]
+    }
+
+    return mainMenu;
+}
 const botServies = async (req)=>{
 
     if(req.body.payload.type === "text"){
@@ -96,18 +126,18 @@ const botServies = async (req)=>{
         */
 
         let options = allProducts.map(product => {
-            return { type : "text", title : product.name }
+            return { type : "text", title : product.category }
         })
 
         const mainMenu = {
             "type": "list", 
             "title": "hi " + req.body.payload.sender.name, 
-            "body": "We have list of products, select a product !!", 
-            "msgid": "productMenu", 
+            "body": "We have list of categories, select a category !!", 
+            "msgid": "categoryMenu", 
             "globalButtons": [
                 { 
                     "type": "text", 
-                    "title": "Menu" 
+                    "title": "Categories" 
                 }
             ], 
             "items": [
@@ -123,7 +153,11 @@ const botServies = async (req)=>{
         return mainMenu;
     }
     else if( req.body.payload.type === "list_reply"){
-        return await productDetails(req.body);
+        let queryType = req.body.payload.payload.id.split('-')[0];
+        switch(queryType){
+            case "categoryMenu" : return await productMenu(req);
+            case "productDetails" : return await productDetails(req.body);
+        }
     }
     else if( req.body.payload.type === "button_reply"){
         let queryType = req.body.payload.payload.id.split('-')[0];
