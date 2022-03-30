@@ -89,7 +89,7 @@ const productMenu = async (req)=>{
 
     const mainMenu = {
         "type": "list", 
-        "title": "Availabe Product for " + categoryTitle , 
+        "title": "Availabe Product" , 
         "body": "We have list of products, select a product !!", 
         "msgid": "productDetails", 
         "globalButtons": [
