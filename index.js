@@ -2,12 +2,25 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
+const multer = require('multer')
 require('dotenv').config();
 
 const options = {cors: {
     origin: "*"
   }};
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './public/images/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    },
+})
+
+const upload = multer({ storage: storage })
+
+app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 app.use(cors());
 
@@ -23,6 +36,9 @@ db.once('open', function (callback) {
 app.get('/', (req, res) => {
     res.send("hello world. !");
 });
+app.get("/check",(req,res) => {
+    res.send("check")
+})
 
 const { botServies } = require("./Services/botServices");
 app.post('/whatsapp', async (req, res) => {
@@ -79,6 +95,10 @@ app.get("/getAllEnquiries", async(req,res)=>{
     const response = await getAllEnquiries();
     res.send(response);
 })
+
+app.post('/image', upload.single('file'), function (req, res) {
+    res.send("done");
+  })
  
 const PORT = process.env.PORT;
 app.listen(PORT, () => {

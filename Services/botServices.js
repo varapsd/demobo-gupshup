@@ -32,10 +32,28 @@ const productProcess = async (req)=>{
     const action = req.body.payload.payload.title;
     const productId = req.body.payload.payload.id.split('-')[1];
     if(action == "sample image"){
+        const response = {
+            "type":"quick_reply",
+            "msgid":"productDetails-"+productId,
+            "content":{ 
+                "type":"image",
+                "text": "Sample Image",
+                "url":"https://demo-gupshup-flow.herokuapp.com/images/"+productId+".jpg",
+            },
+            "options":[ 
+                { 
+                    "type":"text", 
+                    "title":"order"
+                }
+            ]
+        }
+        return response;
+        /*
         return{
             "type": "text",
             "text": "sample image will be sent!!"
         }
+        */
     }
     else if( action == "order"){
         const response = await addNewOrder({productId:productId,phone: req.body.payload.sender.phone, name: req.body.payload.sender.name });
