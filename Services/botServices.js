@@ -87,6 +87,7 @@ const productMenu = async (req)=>{
             return { type : "text", title : product.name }
     })
 
+    console.log(options);
     const mainMenu = {
         "type": "list", 
         "title": "Availabe Product" , 
