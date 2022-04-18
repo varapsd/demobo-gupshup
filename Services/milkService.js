@@ -186,9 +186,10 @@ const productDetails = async(req) =>{
         "type":"quick_reply",
         "msgid":"productDetails-"+productCategory+"-"+productDetailsDTO.id,
         "content":{ 
-            "type":"text", 
+            "type":"image", 
             "header": productDetailsDTO.name, 
-            "text":`\n\n${productDetailsDTO.description}\n*Available In :* ${productDetailsDTO.available}\n\n*MRP :* ${productDetailsDTO.mrp}\n\n*Bottle Shelf Life :* ${productDetailsDTO.BottleShellLife ? productDetailsDTO.BottleShellLife : "NONE"}`
+            "text":`${productDetailsDTO.description}\n\n*Available In :* ${productDetailsDTO.available}\n\n*MRP :* ${productDetailsDTO.mrp}\n\n*Bottle Shelf Life :* ${productDetailsDTO.BottleShellLife ? productDetailsDTO.BottleShellLife : "NONE"}`,
+            "url":"https://demo-gupshup-flow.herokuapp.com/images/1.jpg"
         },
         "options":[ 
             { 
