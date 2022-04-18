@@ -139,7 +139,7 @@ const productMenu = async (req)=>{
         "globalButtons": [
             { 
                 "type": "text", 
-                "title": "categoryTitle"
+                "title": categoryTitle
             }
         ], 
         "items": [
