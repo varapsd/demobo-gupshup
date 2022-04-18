@@ -84,15 +84,19 @@ const moreProducts = [
     },
     {
         name : "PANEER COW MILK",
-        description : "Paneer made from 100% pure untouched A2 Gir cows milk vaccuum packed",
+        description : "Paneer made from 100% pure untouched cows milk vaccuum packed",
         available : "200G Pouch",
         mrp : "INR 95"
     }
 ]
+
+const getCategories = async()=>{
+    return ["MILK PRODUCTS", "GHEE PRODUCTS", "MORE PRODUCTS"]
+}
 const milkService = async (req)=>{
 
     if(req.body.payload.type === "text"){
-        const allProducts = moreProducts;
+        const allProducts = getCategories();
         /*
         const response = {
             "type":"quick_reply",
@@ -107,7 +111,7 @@ const milkService = async (req)=>{
         */
 
         let options = allProducts.map(product => {
-            return { type : "text", title : product.name, description : product.description }
+            return { type : "text", title : product }
         })
 
         const mainMenu = {
