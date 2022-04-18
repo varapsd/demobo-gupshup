@@ -60,10 +60,39 @@ const gheeProducts = [
         BottleShellLife : "2  to 3 days"
     }
 ]
+
+const moreProducts = [
+    {
+        name : "A2 MILK VALUE PACK",
+        description : "Home bred, hapy Gir cows, a pleasnt environment setting of Provilac",
+        available : "500 ml and 1000ml",
+        mrp : "INR 50 for 500 ml and INR 85 for 1000ml pouch",
+        BottleShellLife : "2 days"
+    },
+    {
+        name : "BUFFALO MILK VALUE PACK",
+        description : "Buffalo Milk is a nutrient fill that reduces the health gap created",
+        available : "500ml pouch",
+        mrp : "INR 50 for 500ml pouch",
+        BottleShellLife : "2 days"
+    },
+    {
+        name : "PANEER A2 GIR COW MILK",
+        description : "Paneer made from 100% pure untouched A2 Gir cows milk vaccuum packed",
+        available : "200g Pouch",
+        mrp : "INR 195"
+    },
+    {
+        name : "PANEER COW MILK",
+        description : "Paneer made from 100% pure untouched A2 Gir cows milk vaccuum packed",
+        available : "200G Pouch",
+        mrp : "INR 95"
+    }
+]
 const milkService = async (req)=>{
 
     if(req.body.payload.type === "text"){
-        const allProducts = gheeProducts;
+        const allProducts = moreProducts;
         /*
         const response = {
             "type":"quick_reply",
