@@ -6,6 +6,34 @@ const milkProducts = [
         available : "500 ml and 1000 ml",
         mrp : "INR 50 for 500 ml and INR 80 for 1000ml",
         BottleShellLife : "3 days"
+    },
+    {
+        name : "RAW MILK",
+        description : "Provailac Raw Milk stands out of its absolute prutiy.",
+        available : "1000 ml",
+        mrp : "INR 80 for 1000 ml",
+        BottleShellLife : "3 days"
+    },
+    {
+        name : "A@ GIR COW MILK",
+        description : "Home bred, hapy Gir cows, a pleasnt environment setting of Provilac",
+        available : "1000 ml",
+        mrp : "INR 90 for 1000 ml",
+        BottleShellLife : "2 days"
+    },
+    {
+        name : "BUFFALO MILK",
+        description : "Buffalo Milk is a nutrient fill that reduces the health gap created",
+        available : "1000 ml",
+        mrp : "INR 95 for 1000 ml",
+        BottleShellLife : "2 days"
+    },
+    {
+        name : "RAW MILK",
+        description : "Provailac Raw Milk stands out of its absolute prutiy.",
+        available : "1000 ml",
+        mrp : "INR 80 for 1000 ml",
+        BottleShellLife : "3 days"
     }
 ]
 const milkService = async (req)=>{
