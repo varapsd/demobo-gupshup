@@ -153,7 +153,7 @@ const productMenu = async (req)=>{
     return mainMenu;
 }
 
-const productDetails = async() =>{
+const productDetails = async(req) =>{
     const productTitle = req.payload.payload.title;
     const productCategory = req.payload.payload.id.split("-")[1];
      
