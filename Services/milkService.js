@@ -107,7 +107,7 @@ const productMenu = async (req)=>{
         default:
             break;
     }
-    const allProducts = milkProducts;
+    //const allProducts = milkProducts;
     let options = allProducts.filter(ele => {
        return ele;
     }).map(product =>{
