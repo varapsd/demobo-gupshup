@@ -158,15 +158,19 @@ const productDetails = async(req) =>{
     const productCategory = req.payload.payload.id.split("-")[1];
      
     var allProducts;
+    var fileName;
     switch (productCategory) {
         case "MILK PRODUCTS":
             allProducts = milkProducts;
+            fileName = "milk-"
             break;
         case "GHEE PRODUCTS" : 
             allProducts = gheeProducts;
+            fileName = "ghee-"
             break;
         case "MORE PRODUCTS" : 
             allProducts = moreProducts;
+            fileName = "more-"
             break;
         default:
             break;
@@ -189,7 +193,7 @@ const productDetails = async(req) =>{
             "type":"image", 
             "caption": productDetailsDTO.name, 
             "text":`*${productDetailsDTO.name}*\n\n${productDetailsDTO.description}\n\n*Available In :* ${productDetailsDTO.available}\n\n*MRP :* ${productDetailsDTO.mrp}\n\n*Bottle Shelf Life :* ${productDetailsDTO.BottleShellLife ? productDetailsDTO.BottleShellLife : "NONE"}\n\n`,
-            "url":"https://demo-gupshup-flow.herokuapp.com/images/1.jpg"
+            "url":"https://demo-gupshup-flow.herokuapp.com/milk/"+fileName+productDetailsDTO.id+".jpg"
         },
         "options":[ 
             { 
