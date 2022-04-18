@@ -96,7 +96,7 @@ const getCategories = async()=>{
 const milkService = async (req)=>{
 
     if(req.body.payload.type === "text"){
-        const allProducts = getCategories();
+        const allProducts = await getCategories();
         /*
         const response = {
             "type":"quick_reply",
