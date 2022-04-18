@@ -174,7 +174,7 @@ const productDetails = async(req) =>{
     let productDetailsDTO;
 
     for (let index = 0; index < allProducts.length; index++) {
-        const element = array[index];
+        const element = allProducts[index];
         if(element.name === productTitle){
             productDetailsDTO = element;
             break;
