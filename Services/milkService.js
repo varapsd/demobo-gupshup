@@ -15,7 +15,7 @@ const milkProducts = [
         BottleShellLife : "3 days"
     },
     {
-        name : "A@ GIR COW MILK",
+        name : "A2 GIR COW MILK",
         description : "Home bred, hapy Gir cows, a pleasnt environment setting of Provilac",
         available : "1000 ml",
         mrp : "INR 90 for 1000 ml",
@@ -29,10 +29,41 @@ const milkProducts = [
         BottleShellLife : "2 days"
     }
 ]
+
+const gheeProducts = [
+    {
+        name : "CULTURED GHEE",
+        description : "Add a gold touch to your cooking with provalic cultured Ghee.",
+        available : "500 ml glass jar",
+        mrp : "INR 475 for 500 ml",
+        BottleShellLife : "4 months or 120 days"
+    },
+    {
+        name : "A2 GHEE",
+        description : "Bring home this golder elixir",
+        available : "500ml glass jar",
+        mrp : "INR 900 for 500ml",
+        BottleShellLife : "4 months or 120 days"
+    },
+    {
+        name : "BUFFALO GHEE",
+        description : "Finest Buffalo Ghee available in glass Jars",
+        available : "500ml glass jar",
+        mrp : "INR 500 for 500ml",
+        BottleShellLife : "4 months or 120 days"
+    },
+    {
+        name : "KHARWAS",
+        description : "We bring you most Healthy & delectable sweet KHARWAS",
+        available : "120g jar",
+        mrp : "INR 65",
+        BottleShellLife : "2  to 3 days"
+    }
+]
 const milkService = async (req)=>{
 
     if(req.body.payload.type === "text"){
-        const allProducts = milkProducts;
+        const allProducts = gheeProducts;
         /*
         const response = {
             "type":"quick_reply",
