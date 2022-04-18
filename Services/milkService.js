@@ -2,7 +2,7 @@
 const milkProducts = [
     {
         name : "PASTERUIZED MILK",
-        description : "Milked from the finest HF cattle through a completely automated, antoched and hormaone- addition free process.",
+        description : "Milked from the finest HF cattle through a completely automated",
         available : "500 ml and 1000 ml",
         mrp : "INR 50 for 500 ml and INR 80 for 1000ml",
         BottleShellLife : "3 days"
