@@ -133,13 +133,13 @@ const productMenu = async (req)=>{
     console.log(options);
     const mainMenu = {
         "type": "list", 
-        "title": "Milk Products" , 
-        "body": "We have list of milk products, select a product !!", 
+        "title": categoryTitle , 
+        "body": "We have list of "+categoryTitle+" products, select a product !!", 
         "msgid": "productDetails-"+categoryTitle, 
         "globalButtons": [
             { 
                 "type": "text", 
-                "title": "Products" 
+                "title": "categoryTitle"
             }
         ], 
         "items": [
@@ -228,7 +228,7 @@ const milkService = async (req)=>{
 
         const mainMenu = {
             "type": "list", 
-            "title": "hi " + req.body.payload.sender.name, 
+            "title": "Hi " + req.body.payload.sender.name, 
             "body": "We have list of categories, select a category !!", 
             "msgid": "categoryMenu", 
             "globalButtons": [
