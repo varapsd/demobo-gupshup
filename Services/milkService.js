@@ -90,6 +90,53 @@ const moreProducts = [
     }
 ]
 
+
+const productMenu = async (req)=>{
+    const categoryTitle = req.payload.payload.title;
+    var allProducts;
+    switch (categoryTitle) {
+        case "MILK PRODUCTS":
+            allProducts = milkProducts;
+            break;
+        case "GHEE PRODUCTS" : 
+            allProducts = gheeProducts;
+            break;
+        case "MORE PRODUCTS" : 
+            allProducts = moreProducts;
+            break;
+        default:
+            break;
+    }
+    const allProducts = milkProducts;
+    let options = allProducts.filter(ele => {
+       return ele;
+    }).map(product =>{
+        return { type : "text", title : product.name, description : product.description }
+    })
+
+    console.log(options);
+    const mainMenu = {
+        "type": "list", 
+        "title": "Milk Products" , 
+        "body": "We have list of milk products, select a product !!", 
+        "msgid": "productDetails-"+categoryTitle, 
+        "globalButtons": [
+            { 
+                "type": "text", 
+                "title": "Products" 
+            }
+        ], 
+        "items": [
+            { 
+                "title": "Menu",
+                "options": options
+            }
+        ]
+    }
+
+    return mainMenu;
+}
+
 const getCategories = async()=>{
     return ["MILK PRODUCTS", "GHEE PRODUCTS", "MORE PRODUCTS"]
 }
@@ -137,14 +184,14 @@ const milkService = async (req)=>{
         //mainMenu.items.options = options;
         return mainMenu;
     }
-    /*
     else if( req.body.payload.type === "list_reply"){
         let queryType = req.body.payload.payload.id.split('-')[0];
         switch(queryType){
             case "categoryMenu" : return await productMenu(req.body);
-            case "productDetails" : return await productDetails(req.body);
+            //case "productDetails" : return await productDetails(req.body);
         }
     }
+    /*
     else if( req.body.payload.type === "button_reply"){
         let queryType = req.body.payload.payload.id.split('-')[0];
         switch(queryType){
@@ -152,6 +199,7 @@ const milkService = async (req)=>{
         }
     }
     */
+    
 }
 
 module.exports = {
