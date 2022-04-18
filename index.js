@@ -56,6 +56,20 @@ app.post('/whatsapp', async (req, res) => {
     }
 });
 
+const { milkService } = require('./Services/milkService');
+app.post("/milk", async( req,res)=>{
+    console.log(req.body);
+    if(req.body.type == "message"){
+        const response = await milkService();
+        console.log(response);
+        res.send(response);
+        return;
+    }
+    else{
+        return res.sendStatus(200);
+    }
+})
+
 const { addNewProduct } = require("./Models/Products");
 app.post("/addProduct", async (req,res)=>{
     console.log(req.body);
@@ -90,7 +104,7 @@ app.get("/getAllOrders", async(req,res)=>{
     res.send(response);
 })
 
-const { getAllEnquiries } = require("./Models/Enquiry")
+const { getAllEnquiries } = require("./Models/Enquiry");
 app.get("/getAllEnquiries", async(req,res)=>{
     const response = await getAllEnquiries();
     res.send(response);
