@@ -27,13 +27,6 @@ const milkProducts = [
         available : "1000 ml",
         mrp : "INR 95 for 1000 ml",
         BottleShellLife : "2 days"
-    },
-    {
-        name : "RAW MILK",
-        description : "Provailac Raw Milk stands out of its absolute prutiy.",
-        available : "1000 ml",
-        mrp : "INR 80 for 1000 ml",
-        BottleShellLife : "3 days"
     }
 ]
 const milkService = async (req)=>{
