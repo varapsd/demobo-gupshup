@@ -1,6 +1,11 @@
 
+const getCategories = async()=>{
+    return ["MILK PRODUCTS", "GHEE PRODUCTS", "MORE PRODUCTS"]
+}
+
 const milkProducts = [
     {
+        id : 1,
         name : "PASTERUIZED MILK",
         description : "Milked from the finest HF cattle through a completely automated",
         available : "500 ml and 1000 ml",
@@ -8,6 +13,7 @@ const milkProducts = [
         BottleShellLife : "3 days"
     },
     {
+        id : 2,
         name : "RAW MILK",
         description : "Provailac Raw Milk stands out of its absolute prutiy.",
         available : "1000 ml",
@@ -15,6 +21,7 @@ const milkProducts = [
         BottleShellLife : "3 days"
     },
     {
+        id : 3,
         name : "A2 GIR COW MILK",
         description : "Home bred, hapy Gir cows, a pleasnt environment setting of Provilac",
         available : "1000 ml",
@@ -22,6 +29,7 @@ const milkProducts = [
         BottleShellLife : "2 days"
     },
     {
+        id : 4,
         name : "BUFFALO MILK",
         description : "Buffalo Milk is a nutrient fill that reduces the health gap created",
         available : "1000 ml",
@@ -32,6 +40,7 @@ const milkProducts = [
 
 const gheeProducts = [
     {
+        id : 1,
         name : "CULTURED GHEE",
         description : "Add a gold touch to your cooking with provalic cultured Ghee.",
         available : "500 ml glass jar",
@@ -39,6 +48,7 @@ const gheeProducts = [
         BottleShellLife : "4 months or 120 days"
     },
     {
+        id : 2,
         name : "A2 GHEE",
         description : "Bring home this golder elixir",
         available : "500ml glass jar",
@@ -46,6 +56,7 @@ const gheeProducts = [
         BottleShellLife : "4 months or 120 days"
     },
     {
+        id : 3,
         name : "BUFFALO GHEE",
         description : "Finest Buffalo Ghee available in glass Jars",
         available : "500ml glass jar",
@@ -53,6 +64,7 @@ const gheeProducts = [
         BottleShellLife : "4 months or 120 days"
     },
     {
+        id : 4,
         name : "KHARWAS",
         description : "We bring you most Healthy & delectable sweet KHARWAS",
         available : "120g jar",
@@ -63,6 +75,7 @@ const gheeProducts = [
 
 const moreProducts = [
     {
+        id : 1,
         name : "A2 MILK VALUE PACK",
         description : "Home bred, hapy Gir cows, a pleasnt environment setting of Provilac",
         available : "500 ml and 1000ml",
@@ -70,6 +83,7 @@ const moreProducts = [
         BottleShellLife : "2 days"
     },
     {
+        id : 2,
         name : "BUFFALO MILK VALUE PACK",
         description : "Buffalo Milk is a nutrient fill that reduces the health gap created",
         available : "500ml pouch",
@@ -77,12 +91,14 @@ const moreProducts = [
         BottleShellLife : "2 days"
     },
     {
+        id : 3,
         name : "PANEER A2 GIR COW MILK",
         description : "Paneer made from 100% pure untouched A2 Gir cows milk vaccuum packed",
         available : "200g Pouch",
         mrp : "INR 195"
     },
     {
+        id : 4,
         name : "PANEER COW MILK",
         description : "Paneer made from 100% pure untouched cows milk vaccuum packed",
         available : "200G Pouch",
@@ -137,9 +153,56 @@ const productMenu = async (req)=>{
     return mainMenu;
 }
 
-const getCategories = async()=>{
-    return ["MILK PRODUCTS", "GHEE PRODUCTS", "MORE PRODUCTS"]
+const productDetails = async() =>{
+    const productTitle = req.payload.payload.title;
+    const productCategory = req.payload.payload.id.split("-")[1];
+     
+    var allProducts;
+    switch (productCategory) {
+        case "MILK PRODUCTS":
+            allProducts = milkProducts;
+            break;
+        case "GHEE PRODUCTS" : 
+            allProducts = gheeProducts;
+            break;
+        case "MORE PRODUCTS" : 
+            allProducts = moreProducts;
+            break;
+        default:
+            break;
+    }
+    let productDetailsDTO;
+
+    for (let index = 0; index < allProducts.length; index++) {
+        const element = array[index];
+        if(element.name === productTitle){
+            productDetailsDTO = element;
+            break;
+        }
+    }
+    //const productDetailsDTO = await getProductByTitle(productTitle);
+    //const responseDTO = await addNewEnquiry({ productId : productDetailsDTO.productId, name : req.payload.sender.name, phone : req.payload.sender.phone})
+    const response = {
+        "type":"quick_reply",
+        "msgid":"productDetails-"+productCategory+"-"+productDetailsDTO.id,
+        "content":{ 
+            "type":"text", 
+            "header": productDetailsDTO.name, 
+            "text":`${productDetailsDTO.description}\n
+                    Available In : ${productDetailsDTO.available}\n
+                    MRP : ${productDetailsDTO.mrp}\n
+                    Bottle Shelf Life : ${productDetailsDTO.BottleShellLife ? productDetailsDTO.BottleShellLife : "NONE"}`
+        },
+        "options":[ 
+            { 
+                "type":"text", 
+                "title":"order"
+            }
+        ]
+    }
+    return response;
 }
+
 const milkService = async (req)=>{
 
     if(req.body.payload.type === "text"){
@@ -188,7 +251,7 @@ const milkService = async (req)=>{
         let queryType = req.body.payload.payload.id.split('-')[0];
         switch(queryType){
             case "categoryMenu" : return await productMenu(req.body);
-            //case "productDetails" : return await productDetails(req.body);
+            case "productDetails" : return await productDetails(req.body);
         }
     }
     /*
