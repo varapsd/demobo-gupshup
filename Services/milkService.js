@@ -187,7 +187,7 @@ const productDetails = async(req) =>{
         "msgid":"productDetails-"+productCategory+"-"+productDetailsDTO.id,
         "content":{ 
             "type":"image", 
-            "header": productDetailsDTO.name, 
+            "caption": productDetailsDTO.name, 
             "text":`${productDetailsDTO.description}\n\n*Available In :* ${productDetailsDTO.available}\n\n*MRP :* ${productDetailsDTO.mrp}\n\n*Bottle Shelf Life :* ${productDetailsDTO.BottleShellLife ? productDetailsDTO.BottleShellLife : "NONE"}`,
             "url":"https://demo-gupshup-flow.herokuapp.com/images/1.jpg"
         },
