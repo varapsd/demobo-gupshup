@@ -60,7 +60,7 @@ const { milkService } = require('./Services/milkService');
 app.post("/milk", async( req,res)=>{
     console.log(req.body);
     if(req.body.type == "message"){
-        const response = await milkService();
+        const response = await milkService(req);
         console.log(response);
         res.send(response);
         return;
