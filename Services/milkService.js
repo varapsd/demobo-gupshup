@@ -188,7 +188,7 @@ const productDetails = async(req) =>{
         "content":{ 
             "type":"text", 
             "header": productDetailsDTO.name, 
-            "text":`${productDetailsDTO.description}\nAvailable In : ${productDetailsDTO.available}\nMRP : ${productDetailsDTO.mrp}\nBottle Shelf Life : ${productDetailsDTO.BottleShellLife ? productDetailsDTO.BottleShellLife : "NONE"}`
+            "text":`\n${productDetailsDTO.description}\nAvailable In : ${productDetailsDTO.available}\n\nMRP : ${productDetailsDTO.mrp}\n\nBottle Shelf Life : ${productDetailsDTO.BottleShellLife ? productDetailsDTO.BottleShellLife : "NONE"}`
         },
         "options":[ 
             { 
